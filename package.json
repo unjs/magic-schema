@@ -82,7 +82,7 @@
     "@babel/template": "^7.25.9",
     "@types/babel__standalone": "^7.1.9",
     "@types/babel__traverse": "^7.20.6",
-    "@types/node": "^22.10.10",
+    "@types/node": "^22.13.0",
     "@vitest/coverage-v8": "^2.1.8",
     "@vue/compiler-sfc": "^3.5.13",
     "automd": "^0.3.12",
@@ -93,7 +93,7 @@
     "json-schema": "^0.4.0",
     "marked": "^15.0.6",
     "monaco-editor": "^0.52.2",
-    "nuxt": "^3.15.3",
+    "nuxt": "^3.15.4",
     "nuxt-windicss": "^3.0.1",
     "prettier": "^3.4.2",
     "prismjs": "^1.29.0",
@@ -101,5 +101,5 @@
     "unbuild": "^3.3.1",
     "vitest": "^2.1.8"
   },
-  "packageManager": "pnpm@9.15.4"
+  "packageManager": "pnpm@9.15.5"
 }
