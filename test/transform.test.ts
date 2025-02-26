@@ -336,6 +336,62 @@ describe("transform (jsdoc)", () => {
     });
   });
 
+  it("does not split example without codeblock", () => {
+    const result = transform(`
+      export default {
+        /**
+         * @note This is a note.
+         * @example
+         * export default secretNumber = 42
+         *
+         * export default nothing = null
+         * @type {'src' | 'root'}
+         */
+        srcDir: 'src'
+      }
+    `);
+    expectCodeToMatch(result, /export default ([\S\s]*)$/, {
+      srcDir: {
+        $default: "src",
+        $schema: {
+          title: "",
+          tsType: "'src' | 'root'",
+          description: "",
+          tags: [
+            "@note This is a note.",
+            "@example\nexport default secretNumber = 42\n\nexport default nothing = null",
+          ],
+        },
+      },
+    });
+  });
+
+  it("supports codeblock without `@example`", () => {
+    const result = transform(`
+      export default {
+        /**
+         * @note This is a note.
+         * \`\`\`js
+         * export default secret
+         * \`\`\`
+         * @type {'src' | 'root'}
+         */
+        srcDir: 'src'
+      }
+    `);
+    expectCodeToMatch(result, /export default ([\S\s]*)$/, {
+      srcDir: {
+        $default: "src",
+        $schema: {
+          title: "",
+          tsType: "'src' | 'root'",
+          description: "",
+          tags: ["@note This is a note.", "```js\nexport default secret\n```"],
+        },
+      },
+    });
+  });
+
   it("correctly parses type assertion", () => {
     const result = transform(`
       import type { InputObject } from 'untyped'
